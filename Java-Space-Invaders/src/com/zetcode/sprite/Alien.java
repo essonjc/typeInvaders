@@ -1,13 +1,21 @@
 package com.zetcode.sprite;
 
+import javafx.scene.input.KeyCode;
+
 import javax.swing.ImageIcon;
+import java.awt.event.KeyEvent;
 
 public class Alien extends Sprite {
 
     private Bomb bomb;
+    private String word;
+    private int health;
+    private int index;
 
-    public Alien(int x, int y) {
-
+    public Alien(int x, int y, String s) {
+        word = s;
+        health = s.length();
+        index = 0;
         initAlien(x, y);
     }
 
@@ -24,14 +32,22 @@ public class Alien extends Sprite {
         setImage(ii.getImage());
     }
 
-    public void act(int direction) {
-
-        this.x += direction;
+    public int getHit(){
+        health -= 1;
+        return health;
     }
 
     public Bomb getBomb() {
 
         return bomb;
+    }
+
+    public boolean isNextLetter(int key) {
+        if(key == KeyEvent.getExtendedKeyCodeForChar(word.charAt(index))){
+            index++;
+            return true;
+        }
+        return false;
     }
 
     public class Bomb extends Sprite {

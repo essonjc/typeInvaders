@@ -8,13 +8,14 @@ import java.awt.event.KeyEvent;
 public class Player extends Sprite {
 
     private int width;
+    private int currentLane;
 
-    public Player() {
-
-        initPlayer();
+    public Player(int lane, int x) {
+        currentLane = lane;
+        initPlayer(x);
     }
 
-    private void initPlayer() {
+    private void initPlayer(int x) {
 
         var playerImg = "src/images/player.png";
         var ii = new ImageIcon(playerImg);
@@ -22,7 +23,7 @@ public class Player extends Sprite {
         width = ii.getImage().getWidth(null);
         setImage(ii.getImage());
 
-        int START_X = 270;
+        int START_X = x;
         setX(START_X);
 
         int START_Y = 700;
@@ -44,21 +45,21 @@ public class Player extends Sprite {
         }
     }
 
-    public void keyPressed(KeyEvent e) {
-
-        int key = e.getKeyCode();
-
-        if (key == KeyEvent.VK_LEFT) {
-
-            dx = -2;
-        }
-
-        if (key == KeyEvent.VK_RIGHT) {
-
-            dx = 2;
-        }
-    }
-
+//    public void keyPressed(KeyEvent e) {
+//
+//        int key = e.getKeyCode();
+//
+//        if (key == KeyEvent.VK_LEFT) {
+//
+//            dx = -2;
+//        }
+//
+//        if (key == KeyEvent.VK_RIGHT) {
+//
+//            dx = 2;
+//        }
+//    }
+//
     public void keyReleased(KeyEvent e) {
 
         int key = e.getKeyCode();
@@ -72,5 +73,17 @@ public class Player extends Sprite {
 
             dx = 0;
         }
+    }
+
+    public void setLane(int lane, int dx){
+
+    }
+
+    public int getCurrentLane() {
+        return currentLane;
+    }
+
+    public void setCurrentLane(int currentLane) {
+        this.currentLane = currentLane;
     }
 }
