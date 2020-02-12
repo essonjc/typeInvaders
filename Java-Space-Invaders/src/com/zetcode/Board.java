@@ -14,7 +14,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 
 public class Board extends JPanel {
@@ -36,6 +38,10 @@ public class Board extends JPanel {
     private Timer timer;
     private int ticks;
 
+    private Date initialTime;
+    private Date finalTime;
+
+    private long spawnTime = 2000; //2 seconds
 
     public Board() {
 
@@ -52,11 +58,14 @@ public class Board extends JPanel {
 
         timer = new Timer(Commons.DELAY, new GameCycle());
         timer.start();
+        System.out.println(timer.toString());
         ticks = 0;
     }
 
 
     private void gameInit() {
+
+        initialTime = new Date();
 
         lanes = new Lane[4];
         int spaceBetween = Commons.BOARD_WIDTH/4;
@@ -65,10 +74,6 @@ public class Board extends JPanel {
         lanes[1] = new Lane(firstLane + spaceBetween);
         lanes[2] = new Lane(firstLane + spaceBetween*2);
         lanes[3] = new Lane(firstLane + spaceBetween*3);
-
-        for(int i = 0; i < lanes.length; i++){
-            lanes[i].spawnAlien();
-        }
 
         player = new Player(0, lanes[0].getX_coordinate());
       //  player.setLane(0,lanes[0].getX_coordinate());
@@ -101,7 +106,6 @@ public class Board extends JPanel {
     private void drawPlayer(Graphics g) {
 
         if (player.isVisible()) {
-            System.out.println(player.getX());
             g.drawImage(player.getImage(), player.getX() - (Commons.PLAYER_WIDTH/2), player.getY() - Commons.PLAYER_HEIGHT, Commons.PLAYER_WIDTH, Commons.PLAYER_HEIGHT, this);
         }
 
@@ -201,6 +205,8 @@ public class Board extends JPanel {
     }
 
     private void update() {
+        var generator = new Random();
+        finalTime = new Date();
 
         if (deaths == Commons.NUMBER_OF_ALIENS_TO_DESTROY) {
 
@@ -267,6 +273,13 @@ public class Board extends JPanel {
 
         // aliens
 
+
+        if(finalTime.getTime() - initialTime.getTime() >= spawnTime){
+            initialTime = finalTime;
+            int select = generator.nextInt(4);
+            lanes[select].spawnAlien();
+        }
+
         for(Lane lane: lanes) {
             for (Alien alien : lane.getAliens()) {
 
@@ -284,7 +297,6 @@ public class Board extends JPanel {
         }
 
         // bombs
-        var generator = new Random();
 
         for(Lane lane: lanes) {
             for (Alien alien : lane.getAliens()) {
