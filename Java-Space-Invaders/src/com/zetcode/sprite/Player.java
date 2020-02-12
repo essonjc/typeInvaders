@@ -34,12 +34,11 @@ public class Player extends Sprite {
         setY(START_Y);
     }
 
-    public void act() {
-
-        x = dx;
-
-
-    }
+//    public void act() {
+//
+//        x = dx;
+//
+//    }
 
     public void keyReleased(KeyEvent e) {
 
@@ -47,25 +46,25 @@ public class Player extends Sprite {
 
         if (key == KeyEvent.VK_LEFT) {
 
-            dx = 0;
+            x = 0;
         }
 
         if (key == KeyEvent.VK_RIGHT) {
 
-            dx = 0;
+            x = 0;
         }
     }
 
-    public void setLane(int lane, int dx){
+    public void setLane(int lane, int x){
         currentLane = lane;
-        this.dx = dx;
-    }
+        this.x = x;
+                }
 
-    public int getCurrentLane() {
+public int getCurrentLane() {
         return currentLane;
-    }
+        }
 
-    public void setCurrentLane(int currentLane) {
+public void setCurrentLane(int currentLane) {
         this.currentLane = currentLane;
-    }
-}
+        }
+        }

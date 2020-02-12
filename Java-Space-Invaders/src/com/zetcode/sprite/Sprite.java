@@ -10,7 +10,6 @@ public class Sprite {
 
     int x;
     int y;
-    int dx;
 
     public Sprite() {
 

@@ -53,8 +53,6 @@ public class Board extends JPanel {
         timer = new Timer(Commons.DELAY, new GameCycle());
         timer.start();
         ticks = 0;
-
-        gameInit();
     }
 
 
@@ -73,6 +71,7 @@ public class Board extends JPanel {
         }
 
         player = new Player(0, lanes[0].getX_coordinate());
+      //  player.setLane(0,lanes[0].getX_coordinate());
         shots = new ArrayList<>();
 
         planet = new Planet();
@@ -102,7 +101,7 @@ public class Board extends JPanel {
     private void drawPlayer(Graphics g) {
 
         if (player.isVisible()) {
-
+            System.out.println(player.getX());
             g.drawImage(player.getImage(), player.getX() - (Commons.PLAYER_WIDTH/2), player.getY() - Commons.PLAYER_HEIGHT, Commons.PLAYER_WIDTH, Commons.PLAYER_HEIGHT, this);
         }
 
@@ -211,7 +210,7 @@ public class Board extends JPanel {
         }
 
         // player
-        player.act();
+       // player.act();
 
         ticks = (ticks % 2) + 1;
 
