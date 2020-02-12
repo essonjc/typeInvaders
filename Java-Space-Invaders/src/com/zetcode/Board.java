@@ -43,6 +43,8 @@ public class Board extends JPanel {
 
     private long spawnTime = 2000; //2 seconds
 
+    Random generator;
+
     public Board() {
 
         initBoard();
@@ -66,6 +68,7 @@ public class Board extends JPanel {
     private void gameInit() {
 
         initialTime = new Date();
+        generator = new Random();
 
         lanes = new Lane[4];
         int spaceBetween = Commons.BOARD_WIDTH/4;
@@ -74,6 +77,8 @@ public class Board extends JPanel {
         lanes[1] = new Lane(firstLane + spaceBetween);
         lanes[2] = new Lane(firstLane + spaceBetween*2);
         lanes[3] = new Lane(firstLane + spaceBetween*3);
+
+        lanes[generator.nextInt(4)].spawnAlien();
 
         player = new Player(0, lanes[0].getX_coordinate());
       //  player.setLane(0,lanes[0].getX_coordinate());
@@ -205,7 +210,6 @@ public class Board extends JPanel {
     }
 
     private void update() {
-        var generator = new Random();
         finalTime = new Date();
 
         if (deaths == Commons.NUMBER_OF_ALIENS_TO_DESTROY) {
