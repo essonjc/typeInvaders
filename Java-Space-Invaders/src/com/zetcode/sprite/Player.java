@@ -36,17 +36,9 @@ public class Player extends Sprite {
 
     public void act() {
 
-        x += dx;
+        x = dx;
 
-        if (x <= 2) {
 
-            x = 2;
-        }
-
-        if (x >= Commons.BOARD_WIDTH - 2 * width) {
-
-            x = Commons.BOARD_WIDTH - 2 * width;
-        }
     }
 
 //    public void keyPressed(KeyEvent e) {

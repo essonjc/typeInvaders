@@ -365,7 +365,7 @@ public class Board extends JPanel {
         @Override
         public void keyReleased(KeyEvent e) {
 
-            player.keyReleased(e);
+            //player.keyReleased(e);
         }
 
         @Override
