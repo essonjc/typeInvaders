@@ -1,7 +1,5 @@
 package com.zetcode.sprite;
 
-import javafx.scene.input.KeyCode;
-
 import javax.swing.ImageIcon;
 import java.awt.event.KeyEvent;
 
@@ -17,6 +15,10 @@ public class Alien extends Sprite {
         health = s.length();
         index = 0;
         initAlien(x, y);
+    }
+
+    public String getWord(){
+        return this.word;
     }
 
     private void initAlien(int x, int y) {
@@ -43,7 +45,7 @@ public class Alien extends Sprite {
     }
 
     public boolean isNextLetter(int key) {
-        if(key == KeyEvent.getExtendedKeyCodeForChar(word.charAt(index))){
+        if(index < word.length() && key == KeyEvent.getExtendedKeyCodeForChar(word.charAt(index))){
             index++;
             return true;
         }
