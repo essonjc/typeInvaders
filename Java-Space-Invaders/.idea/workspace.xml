@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="db5f8f3e-360e-4182-afc6-1744faf481e0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/zetcode/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/zetcode/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zetcode/sprite/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/zetcode/sprite/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/zetcode/sprite/Alien.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/zetcode/sprite/Alien.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/zetcode/sprite/Lane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/zetcode/sprite/Lane.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,32 +122,21 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="178" key="#Project_Structure/0.0.1920.1040@0.0.1920.1040" timestamp="1581474736096" />
-    <state width="1877" height="232" key="GridCell.Tab.0.bottom" timestamp="1581475270940">
+    <state width="1877" height="232" key="GridCell.Tab.0.bottom" timestamp="1581476930153">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="232" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1581475270940" />
-    <state width="1877" height="232" key="GridCell.Tab.0.center" timestamp="1581475270940">
+    <state width="1877" height="232" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1581476930153" />
+    <state width="1877" height="232" key="GridCell.Tab.0.center" timestamp="1581476930153">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="232" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1581475270940" />
-    <state width="1877" height="232" key="GridCell.Tab.0.left" timestamp="1581475270940">
+    <state width="1877" height="232" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1581476930153" />
+    <state width="1877" height="232" key="GridCell.Tab.0.left" timestamp="1581476930153">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="232" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1581475270940" />
-    <state width="1877" height="232" key="GridCell.Tab.0.right" timestamp="1581475270940">
+    <state width="1877" height="232" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1581476930153" />
+    <state width="1877" height="232" key="GridCell.Tab.0.right" timestamp="1581476930153">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="232" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1581475270940" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/zetcode/Board.java</url>
-          <line>377</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <state width="1877" height="232" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1581476930153" />
   </component>
 </project>

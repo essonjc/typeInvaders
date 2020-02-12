@@ -90,11 +90,14 @@ public class Board extends JPanel {
                 if (alien.isVisible()) {
 
                     g.drawImage(alien.getImage(), alien.getX(), alien.getY(), this);
+
+                    g.drawString(alien.getWord(), alien.getX(), alien.getY() + 30);
                 }
 
                 if (alien.isDying()) {
 
                     alien.die();
+                    lane.killAlien();
                 }
             }
         }
@@ -383,7 +386,7 @@ public class Board extends JPanel {
                 if (inGame) {
                     var alien = getEnemyInLine();
 
-                    if (alien.isNextLetter(key)) {
+                    if (alien != null && alien.isNextLetter(key)) {
                         Shot shot = new Shot(x, y);
                         shots.add(shot);
                         lastShot = shot;

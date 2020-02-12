@@ -30,6 +30,8 @@ public class Lane {
 
     public void killAlien(){
         aliens.poll();
+
+        this.spawnAlien();
     }
 
     public Queue<Alien> getAliens(){
