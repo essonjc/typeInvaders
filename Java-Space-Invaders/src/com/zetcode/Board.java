@@ -77,7 +77,7 @@ public class Board extends JPanel {
             lanes[i].spawnAlien();
         }
 
-        player = new Player();
+        player = new Player(0, lanes[0].getX_coordinate());
         shots = new ArrayList<>();
         lastShot = new Shot();
     }
@@ -339,18 +339,25 @@ public class Board extends JPanel {
     }
 
     private Alien getEnemyInLine(){
-        var alienToReturn = aliens.get(0);
-        for (Alien alien: aliens){
-            if (alien.getY() > alienToReturn.getY()){
-                alienToReturn = alien;
-            }
-        }
-        return alienToReturn;
+        return lanes[player.getCurrentLane()].getNextAlien();
     }
 
     private void movePlayer(KeyEvent e){
-        //TODO determine next lane, call player.setLane
+        int key = e.getKeyCode();
 
+        if (key == KeyEvent.VK_LEFT) {
+            int currentLane = player.getLane();
+            if (currentLane > 0) {
+                player.setLane(currentLane - 1, lanes[currentLane - 1].getX_coordinate());
+            }
+        }
+
+        if (key == KeyEvent.VK_RIGHT) {
+            int currentLane = player.getLane();
+            if (currentLane < lanes.length - 1) {
+                player.setLane(currentLane + 1, lanes[currentLane + 1].getX_coordinate());
+            }
+        }
     }
 
     private class TAdapter extends KeyAdapter {

@@ -15,6 +15,10 @@ public class Player extends Sprite {
         initPlayer(x);
     }
 
+    public int getLane() {
+        return currentLane;
+    }
+
     private void initPlayer(int x) {
 
         var playerImg = "src/images/player.png";
@@ -76,7 +80,8 @@ public class Player extends Sprite {
     }
 
     public void setLane(int lane, int dx){
-
+        currentLane = lane;
+        this.dx = dx;
     }
 
     public int getCurrentLane() {
