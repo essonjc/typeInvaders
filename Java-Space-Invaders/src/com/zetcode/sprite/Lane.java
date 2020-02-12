@@ -24,7 +24,7 @@ public class Lane {
 
     public void spawnAlien(){
         Random r = new Random();
-        int wordIndex = r.nextInt(DICTIONARY_LENGTH + 1);
+        int wordIndex = r.nextInt(dictionary.length);
         aliens.add(new Alien(x_coordinate, 0, dictionary[wordIndex]));
     }
 

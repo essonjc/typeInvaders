@@ -41,21 +41,6 @@ public class Player extends Sprite {
 
     }
 
-//    public void keyPressed(KeyEvent e) {
-//
-//        int key = e.getKeyCode();
-//
-//        if (key == KeyEvent.VK_LEFT) {
-//
-//            dx = -2;
-//        }
-//
-//        if (key == KeyEvent.VK_RIGHT) {
-//
-//            dx = 2;
-//        }
-//    }
-//
     public void keyReleased(KeyEvent e) {
 
         int key = e.getKeyCode();

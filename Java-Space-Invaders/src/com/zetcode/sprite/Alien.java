@@ -1,5 +1,7 @@
 package com.zetcode.sprite;
 
+import com.zetcode.Commons;
+
 import javax.swing.ImageIcon;
 import java.awt.event.KeyEvent;
 
@@ -9,6 +11,7 @@ public class Alien extends Sprite {
     private String word;
     private int health;
     private int index;
+    private boolean attacking;
 
     public Alien(int x, int y, String s) {
         word = s;
@@ -26,12 +29,12 @@ public class Alien extends Sprite {
         this.x = x;
         this.y = y;
 
-        bomb = new Bomb(x, y);
-
         var alienImg = "src/images/alien.png";
         var ii = new ImageIcon(alienImg);
 
         setImage(ii.getImage());
+
+        attacking = false;
     }
 
     public int getHit(){
@@ -40,8 +43,11 @@ public class Alien extends Sprite {
     }
 
     public Bomb getBomb() {
-
         return bomb;
+    }
+
+    public void setBomb(Bomb b) {
+        bomb = b;
     }
 
     public boolean isNextLetter(int key) {
@@ -52,35 +58,15 @@ public class Alien extends Sprite {
         return false;
     }
 
-    public class Bomb extends Sprite {
-
-        private boolean destroyed;
-
-        public Bomb(int x, int y) {
-
-            initBomb(x, y);
+    public void startAttacking() {
+        if(!attacking) {
+            attacking = true;
+            bomb = new Bomb(getX(), getY() + Commons.ALIEN_HEIGHT);
+            bomb.setDestroyed(false);
         }
+    }
 
-        private void initBomb(int x, int y) {
-
-            setDestroyed(true);
-
-            this.x = x;
-            this.y = y;
-
-            var bombImg = "src/images/bomb.png";
-            var ii = new ImageIcon(bombImg);
-            setImage(ii.getImage());
-        }
-
-        public void setDestroyed(boolean destroyed) {
-
-            this.destroyed = destroyed;
-        }
-
-        public boolean isDestroyed() {
-
-            return destroyed;
-        }
+    public boolean isAttacking() {
+        return attacking;
     }
 }

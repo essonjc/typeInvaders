@@ -1,9 +1,6 @@
 package com.zetcode;
 
-import com.zetcode.sprite.Alien;
-import com.zetcode.sprite.Lane;
-import com.zetcode.sprite.Player;
-import com.zetcode.sprite.Shot;
+import com.zetcode.sprite.*;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -18,8 +15,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Random;
 
 public class Board extends JPanel {
@@ -29,8 +24,8 @@ public class Board extends JPanel {
     private Lane[] lanes;
 
     private Player player;
-    private Shot lastShot;
     private ArrayList<Shot> shots;
+    private Planet planet;
     
     private int deaths = 0;
 
@@ -79,7 +74,8 @@ public class Board extends JPanel {
 
         player = new Player(0, lanes[0].getX_coordinate());
         shots = new ArrayList<>();
-        lastShot = new Shot();
+
+        planet = new Planet();
     }
 
     private void drawAliens(Graphics g) {
@@ -89,9 +85,9 @@ public class Board extends JPanel {
 
                 if (alien.isVisible()) {
 
-                    g.drawImage(alien.getImage(), alien.getX(), alien.getY(), this);
+                    g.drawImage(alien.getImage(), alien.getX() - (Commons.ALIEN_WIDTH / 2), alien.getY(), Commons.ALIEN_WIDTH, Commons.ALIEN_HEIGHT, this);
 
-                    g.drawString(alien.getWord(), alien.getX(), alien.getY() + 30);
+                    g.drawString(alien.getWord(), alien.getX() - (alien.getWord().length()), alien.getY() + 10 + Commons.ALIEN_HEIGHT);
                 }
 
                 if (alien.isDying()) {
@@ -107,7 +103,7 @@ public class Board extends JPanel {
 
         if (player.isVisible()) {
 
-            g.drawImage(player.getImage(), player.getX(), player.getY(), this);
+            g.drawImage(player.getImage(), player.getX() - (Commons.PLAYER_WIDTH/2), player.getY() - Commons.PLAYER_HEIGHT, Commons.PLAYER_WIDTH, Commons.PLAYER_HEIGHT, this);
         }
 
         if (player.isDying()) {
@@ -115,6 +111,10 @@ public class Board extends JPanel {
             player.die();
             inGame = false;
         }
+    }
+
+    private void drawPlanet(Graphics g) {
+        g.drawImage(planet.getImage(), 0, Commons.GROUND, Commons.BOARD_WIDTH, Commons.BOARD_HEIGHT - Commons.GROUND, this);
     }
 
     private void drawShot(Shot shot, Graphics g) {
@@ -130,9 +130,9 @@ public class Board extends JPanel {
         for (Lane lane: lanes) {
             for (Alien a : lane.getAliens()) {
 
-                Alien.Bomb b = a.getBomb();
+                Bomb b = a.getBomb();
 
-                if (!b.isDestroyed()) {
+                if (b != null && !b.isDestroyed()) {
 
                     g.drawImage(b.getImage(), b.getX(), b.getY(), this);
                 }
@@ -163,6 +163,7 @@ public class Board extends JPanel {
 
             g.drawLine(0, Commons.GROUND,
                     Commons.BOARD_WIDTH, Commons.GROUND);
+            drawPlanet(g);
 
             drawAliens(g);
             drawPlayer(g);
@@ -212,7 +213,7 @@ public class Board extends JPanel {
         // player
         player.act();
 
-        ticks += 1;
+        ticks = (ticks % 2) + 1;
 
         ArrayList<Shot> deadShots = new ArrayList<>();
 
@@ -270,9 +271,14 @@ public class Board extends JPanel {
         for(Lane lane: lanes) {
             for (Alien alien : lane.getAliens()) {
 
-                if (ticks == 5) {
-                    alien.setY(alien.getY() + 1);
-                    ticks = 0;
+                if (ticks == 2) {
+                    if(!alien.isAttacking()) {
+                        alien.setY(alien.getY() + 1);
+                    }
+
+                    if(alien.getY() >= Commons.GROUND - Commons.PLAYER_HEIGHT - Commons.ALIEN_HEIGHT - 10){
+                        alien.startAttacking();
+                    }
                 }
 
             }
@@ -284,45 +290,43 @@ public class Board extends JPanel {
         for(Lane lane: lanes) {
             for (Alien alien : lane.getAliens()) {
 
-            int shot = generator.nextInt(15);
-            Alien.Bomb bomb = alien.getBomb();
+                int shot = generator.nextInt(15);
+                Bomb bomb = alien.getBomb();
 
-            if (shot == Commons.CHANCE && alien.isVisible() && bomb.isDestroyed()) {
+                if (bomb != null) {
+                    if (alien.isVisible() && bomb.isDestroyed()) {
+                        bomb.setDestroyed(false);
+                        bomb.setX(alien.getX());
+                        bomb.setY(alien.getY() + Commons.ALIEN_HEIGHT);
+                    }
 
-                bomb.setDestroyed(false);
-                bomb.setX(alien.getX());
-                bomb.setY(alien.getY());
-            }
+                    int bombX = bomb.getX();
+                    int bombY = bomb.getY();
+                    int playerX = player.getX();
+                    int playerY = player.getY();
 
-            int bombX = bomb.getX();
-            int bombY = bomb.getY();
-            int playerX = player.getX();
-            int playerY = player.getY();
+                    if (player.isVisible() && !bomb.isDestroyed()) {
 
-            if (player.isVisible() && !bomb.isDestroyed()) {
+                        if (bombY >= Commons.BOARD_HEIGHT - 100) {
 
-                if (bombX >= (playerX)
-                        && bombX <= (playerX + Commons.PLAYER_WIDTH)
-                        && bombY >= (playerY)
-                        && bombY <= (playerY + Commons.PLAYER_HEIGHT)) {
+                            var ii = new ImageIcon(explImg);
+                            //player.setImage(ii.getImage());
+                            //player.setDying(true);
+                            bomb.setImage(ii.getImage());
+                        }
+                    }
 
-                    var ii = new ImageIcon(explImg);
-                    player.setImage(ii.getImage());
-                    player.setDying(true);
-                    bomb.setDestroyed(true);
+                    if (!bomb.isDestroyed()) {
+
+                        bomb.setY(bomb.getY() + 1);
+
+                        if (bomb.getY() >= Commons.BOARD_HEIGHT - 100) {
+
+                            bomb.setDestroyed(true);
+                        }
+                    }
                 }
             }
-
-            if (!bomb.isDestroyed()) {
-
-                bomb.setY(bomb.getY() + 1);
-
-                if (bomb.getY() >= Commons.GROUND - Commons.BOMB_HEIGHT) {
-
-                    bomb.setDestroyed(true);
-                }
-            }
-        }
         }
     }
 
@@ -376,8 +380,8 @@ public class Board extends JPanel {
 
             movePlayer(e);
 
-            int x = player.getX();
-            int y = player.getY();
+            int x = player.getX() - 5;
+            int y = player.getY() - Commons.PLAYER_HEIGHT;
 
             int key = e.getKeyCode();
 
@@ -389,7 +393,6 @@ public class Board extends JPanel {
                     if (alien != null && alien.isNextLetter(key)) {
                         Shot shot = new Shot(x, y);
                         shots.add(shot);
-                        lastShot = shot;
                     }
                 }
             }
