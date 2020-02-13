@@ -4,6 +4,8 @@ import javax.swing.*;
 
 public class Planet extends Sprite {
 
+    private int health;
+
     public Planet(){
         initPlanet();
     }
@@ -12,6 +14,14 @@ public class Planet extends Sprite {
         var planetImg = "src/images/planet.png";
         var ii = new ImageIcon(planetImg);
         setImage(ii.getImage());
+        health = 1;
     }
 
+    public void hit() {
+        health -= 1;
+    }
+
+    public boolean dead() {
+        return health<=0;
+    }
 }

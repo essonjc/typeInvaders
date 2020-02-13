@@ -28,11 +28,13 @@ public class Board extends JPanel {
     private Player player;
     private ArrayList<Shot> shots;
     private Planet planet;
+    private boolean gameOverExplosion;
     
     private int deaths = 0;
 
     private boolean inGame = true;
     private String explImg = "src/images/explosion.png";
+    private String bombExplImg = "src/images/explosion.gif";
     private String message = "Game Over";
 
     private Timer timer;
@@ -62,6 +64,8 @@ public class Board extends JPanel {
         timer.start();
         System.out.println(timer.toString());
         ticks = 0;
+
+        gameOverExplosion = false;
     }
 
 
@@ -140,9 +144,13 @@ public class Board extends JPanel {
 
                 Bomb b = a.getBomb();
 
-                if (b != null && !b.isDestroyed()) {
-
-                    g.drawImage(b.getImage(), b.getX(), b.getY(), this);
+                if (b != null) {
+                    if(b.isDestroyed()){
+                        var ii = new ImageIcon(bombExplImg);
+                        g.drawImage(ii.getImage(), b.getX() - 25, b.getY() - 25, 50, 50, this);
+                    }else {
+                        g.drawImage(b.getImage(), b.getX(), b.getY(), this);
+                    }
                 }
             }
         }
@@ -163,11 +171,11 @@ public class Board extends JPanel {
 
     private void doDrawing(Graphics g) {
 
-        g.setColor(Color.black);
-        g.fillRect(0, 0, d.width, d.height);
-        g.setColor(Color.green);
-
         if (inGame) {
+
+            g.setColor(Color.black);
+            g.fillRect(0, 0, d.width, d.height);
+            g.setColor(Color.green);
 
             g.drawLine(0, Commons.GROUND,
                     Commons.BOARD_WIDTH, Commons.GROUND);
@@ -178,13 +186,14 @@ public class Board extends JPanel {
             drawShots(g);
             drawBombing(g);
 
-        } else {
+        } else{// if(gameOverExplosion) {
 
             if (timer.isRunning()) {
                 timer.stop();
             }
 
             gameOver(g);
+            //gameOverExplosion= false;
         }
 
         Toolkit.getDefaultToolkit().sync();
@@ -192,21 +201,24 @@ public class Board extends JPanel {
 
     private void gameOver(Graphics g) {
 
-        g.setColor(Color.black);
-        g.fillRect(0, 0, Commons.BOARD_WIDTH, Commons.BOARD_HEIGHT);
+            g.setColor(Color.black);
+            g.fillRect(0, 0, Commons.BOARD_WIDTH, Commons.BOARD_HEIGHT);
 
-        g.setColor(new Color(0, 32, 48));
-        g.fillRect(50, Commons.BOARD_WIDTH / 2 - 30, Commons.BOARD_WIDTH - 100, 50);
-        g.setColor(Color.white);
-        g.drawRect(50, Commons.BOARD_WIDTH / 2 - 30, Commons.BOARD_WIDTH - 100, 50);
+            g.setColor(new Color(0, 32, 48));
+            g.fillRect(50, Commons.BOARD_WIDTH / 2 - 30, Commons.BOARD_WIDTH - 100, 50);
+            g.setColor(Color.white);
+            g.drawRect(50, Commons.BOARD_WIDTH / 2 - 30, Commons.BOARD_WIDTH - 100, 50);
 
-        var small = new Font("Helvetica", Font.BOLD, 14);
-        var fontMetrics = this.getFontMetrics(small);
+            var small = new Font("Helvetica", Font.BOLD, 14);
+            var fontMetrics = this.getFontMetrics(small);
 
-        g.setColor(Color.white);
-        g.setFont(small);
-        g.drawString(message, (Commons.BOARD_WIDTH - fontMetrics.stringWidth(message)) / 2,
-                Commons.BOARD_WIDTH / 2);
+            g.setColor(Color.white);
+            g.setFont(small);
+            g.drawString(message, (Commons.BOARD_WIDTH - fontMetrics.stringWidth(message)) / 2,
+                    Commons.BOARD_WIDTH / 2);
+
+            var ii = new ImageIcon(bombExplImg);
+            g.drawImage(ii.getImage(), Commons.BOARD_WIDTH / 2 - ii.getIconWidth() / 2, Commons.BOARD_HEIGHT - ii.getIconHeight(), ii.getIconWidth(), ii.getIconHeight(), this);
     }
 
     private void update() {
@@ -338,10 +350,15 @@ public class Board extends JPanel {
                         if (bomb.getY() >= Commons.BOARD_HEIGHT - 100) {
 
                             bomb.setDestroyed(true);
+                            planet.hit();
                         }
                     }
                 }
             }
+        }
+
+        if(planet.dead()){
+            player.setDying(true);
         }
     }
 
