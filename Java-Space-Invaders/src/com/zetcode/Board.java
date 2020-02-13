@@ -43,7 +43,7 @@ public class Board extends JPanel {
     private Date initialTime;
     private Date finalTime;
 
-    private long spawnTime = 2000; //2 seconds
+    private long spawnTime = 2500; //3 seconds
 
     Random generator;
 
@@ -96,16 +96,21 @@ public class Board extends JPanel {
         for (Lane lane: lanes){
             for (Alien alien : lane.getAliens()) {
 
+
+
                 if (alien.isVisible()) {
 
-                    g.drawImage(alien.getImage(), alien.getX() - (Commons.ALIEN_WIDTH / 2), alien.getY(), Commons.ALIEN_WIDTH, Commons.ALIEN_HEIGHT, this);
+                    if((lane.getAliens().peek().getWord().equals(alien.getWord()) && alien.isAttacking()) || !alien.isAttacking()) {
+                        g.drawImage(alien.getImage(), alien.getX() - (Commons.ALIEN_WIDTH / 2), alien.getY(), Commons.ALIEN_WIDTH, Commons.ALIEN_HEIGHT, this);
 
-                    g.drawString(alien.getWord(), alien.getX() - (alien.getWord().length()), alien.getY() + 10 + Commons.ALIEN_HEIGHT);
+                        g.drawString(alien.getWord(), alien.getX() - (alien.getWord().length()), alien.getY() + 10 + Commons.ALIEN_HEIGHT);
+                    }
                 }
 
                 if (alien.isDying()) {
 
                     alien.die();
+
                     lane.killAlien();
                 }
             }
@@ -272,7 +277,7 @@ public class Board extends JPanel {
                 }
 
                 int y = shot.getY();
-                y -= 4;
+                y -= 15;
 
                 if (y < 0) {
                     shot.die();
