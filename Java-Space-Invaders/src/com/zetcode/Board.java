@@ -14,7 +14,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
@@ -28,14 +27,14 @@ public class Board extends JPanel {
     private Player player;
     private ArrayList<Shot> shots;
     private Planet planet;
-    private boolean gameOverExplosion;
-    
+    private boolean gameOver;
+
     private int deaths = 0;
 
     private boolean inGame = true;
     private String explImg = "src/images/explosion.png";
-    private String bombExplImg = "src/images/explosion.gif";
-    private String message = "Game Over";
+    private String gameOverImg = "src/images/gameover.png";
+    private String message = "Game Over, you kind of suck at this.";
 
     private Timer timer;
     private int ticks;
@@ -65,7 +64,7 @@ public class Board extends JPanel {
         System.out.println(timer.toString());
         ticks = 0;
 
-        gameOverExplosion = false;
+        gameOver = false;
     }
 
 
@@ -119,7 +118,6 @@ public class Board extends JPanel {
         }
 
         if (player.isDying()) {
-
             player.die();
             inGame = false;
         }
@@ -146,8 +144,8 @@ public class Board extends JPanel {
 
                 if (b != null) {
                     if(b.isDestroyed()){
-                        var ii = new ImageIcon(bombExplImg);
-                        g.drawImage(ii.getImage(), b.getX() - 25, b.getY() - 25, 50, 50, this);
+                        var ii = new ImageIcon(explImg);
+                        g.drawImage(ii.getImage(), b.getX(), b.getY(), this);
                     }else {
                         g.drawImage(b.getImage(), b.getX(), b.getY(), this);
                     }
@@ -164,9 +162,8 @@ public class Board extends JPanel {
 
     @Override
     public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-
-        doDrawing(g);
+            super.paintComponent(g);
+            doDrawing(g);
     }
 
     private void doDrawing(Graphics g) {
@@ -186,23 +183,27 @@ public class Board extends JPanel {
             drawShots(g);
             drawBombing(g);
 
-        } else{// if(gameOverExplosion) {
+            Toolkit.getDefaultToolkit().sync();
+
+        } else {
 
             if (timer.isRunning()) {
                 timer.stop();
             }
 
             gameOver(g);
-            //gameOverExplosion= false;
+
+            Toolkit.getDefaultToolkit().sync();
         }
 
-        Toolkit.getDefaultToolkit().sync();
     }
 
     private void gameOver(Graphics g) {
-
             g.setColor(Color.black);
             g.fillRect(0, 0, Commons.BOARD_WIDTH, Commons.BOARD_HEIGHT);
+
+        var ii = new ImageIcon(gameOverImg);
+        g.drawImage(ii.getImage(), Commons.BOARD_WIDTH / 2 - ii.getIconWidth() / 2, Commons.BOARD_HEIGHT/2 - ii.getIconHeight()/2, ii.getIconWidth(), ii.getIconHeight(), this);
 
             g.setColor(new Color(0, 32, 48));
             g.fillRect(50, Commons.BOARD_WIDTH / 2 - 30, Commons.BOARD_WIDTH - 100, 50);
@@ -217,8 +218,6 @@ public class Board extends JPanel {
             g.drawString(message, (Commons.BOARD_WIDTH - fontMetrics.stringWidth(message)) / 2,
                     Commons.BOARD_WIDTH / 2);
 
-            var ii = new ImageIcon(bombExplImg);
-            g.drawImage(ii.getImage(), Commons.BOARD_WIDTH / 2 - ii.getIconWidth() / 2, Commons.BOARD_HEIGHT - ii.getIconHeight(), ii.getIconWidth(), ii.getIconHeight(), this);
     }
 
     private void update() {
@@ -327,18 +326,13 @@ public class Board extends JPanel {
                         bomb.setY(alien.getY() + Commons.ALIEN_HEIGHT);
                     }
 
-                    int bombX = bomb.getX();
                     int bombY = bomb.getY();
-                    int playerX = player.getX();
-                    int playerY = player.getY();
 
                     if (player.isVisible() && !bomb.isDestroyed()) {
 
                         if (bombY >= Commons.BOARD_HEIGHT - 100) {
 
                             var ii = new ImageIcon(explImg);
-                            //player.setImage(ii.getImage());
-                            //player.setDying(true);
                             bomb.setImage(ii.getImage());
                         }
                     }
@@ -363,9 +357,10 @@ public class Board extends JPanel {
     }
 
     private void doGameCycle() {
-
-        update();
-        repaint();
+        if(!gameOver){
+            update();
+            repaint();
+        }
     }
 
     private class GameCycle implements ActionListener {

@@ -14,7 +14,7 @@ public class Planet extends Sprite {
         var planetImg = "src/images/planet.png";
         var ii = new ImageIcon(planetImg);
         setImage(ii.getImage());
-        health = 1;
+        health = 10;
     }
 
     public void hit() {
