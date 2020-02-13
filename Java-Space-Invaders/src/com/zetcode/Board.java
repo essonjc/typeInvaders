@@ -5,15 +5,12 @@ import com.zetcode.sprite.*;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.geom.Rectangle2D;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
@@ -101,6 +98,9 @@ public class Board extends JPanel {
                     g.drawImage(alien.getImage(), alien.getX() - (Commons.ALIEN_WIDTH / 2), alien.getY(), Commons.ALIEN_WIDTH, Commons.ALIEN_HEIGHT, this);
 
                     g.drawString(alien.getWord(), alien.getX() - (alien.getWord().length()), alien.getY() + 10 + Commons.ALIEN_HEIGHT);
+
+                    //Highlighting
+                    drawHighlight(g, alien);
                 }
 
                 if (alien.isDying()) {
@@ -160,6 +160,21 @@ public class Board extends JPanel {
         for (Shot shot: shots){
             drawShot(shot, g);
         }
+    }
+
+    private void drawHighlight(Graphics g, Alien alien){
+        FontMetrics ft = g.getFontMetrics();
+        Rectangle2D rect = ft.getStringBounds(alien.getWord(),
+                0,
+                alien.getWord().length()-alien.getHealth(),
+                g);
+        Color defaultColor = g.getColor();
+        g.setColor(Color.BLACK);
+        g.fillRect(alien.getX() - (alien.getWord().length()),
+                alien.getY() + Commons.ALIEN_HEIGHT,
+                (int)rect.getWidth(),
+                (int)rect.getHeight());
+        g.setColor(defaultColor);
     }
 
     @Override
@@ -258,6 +273,7 @@ public class Board extends JPanel {
                                     && shotY <= (alienY + Commons.ALIEN_HEIGHT)) {
 
                                 var health = alien.getHit();
+
                                 if (health == 0) {
                                     var ii = new ImageIcon(explImg);
                                     alien.setImage(ii.getImage());
