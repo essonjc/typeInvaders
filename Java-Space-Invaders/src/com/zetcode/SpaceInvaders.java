@@ -1,7 +1,7 @@
 package com.zetcode;
 
 import java.awt.EventQueue;
-import javax.swing.JFrame;
+import javax.swing.*;
 
 public class SpaceInvaders extends JFrame  {
 

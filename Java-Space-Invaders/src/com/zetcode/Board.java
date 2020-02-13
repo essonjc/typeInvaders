@@ -2,9 +2,7 @@ package com.zetcode;
 
 import com.zetcode.sprite.*;
 
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
-import javax.swing.Timer;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -39,7 +37,9 @@ public class Board extends JPanel {
     private Date initialTime;
     private Date finalTime;
 
-    private long spawnTime = 2000; //2 seconds
+    private long spawnTime = 2500; //3 seconds
+
+    JButton start;
 
     Random generator;
 
@@ -56,12 +56,27 @@ public class Board extends JPanel {
         d = new Dimension(Commons.BOARD_WIDTH, Commons.BOARD_HEIGHT);
         setBackground(Color.black);
 
-        timer = new Timer(Commons.DELAY, new GameCycle());
-        timer.start();
-        System.out.println(timer.toString());
-        ticks = 0;
+        var board = this;
+        start = new JButton("Start Game");
+        JPanel panel = new JPanel();
+        start.setSize(100, 20);
+        panel.setSize(100, 20);
+        start.addActionListener(e -> {
 
-        gameOver = false;
+            timer = new Timer(Commons.DELAY, new GameCycle());
+            timer.start();
+            System.out.println(timer.toString());
+            ticks = 0;
+
+            gameOver = false;
+
+            board.remove(panel);
+        });
+        setLayout(null);
+        panel.setLayout(null);
+        panel.add(start);
+        add(panel);
+        panel.setLocation(Commons.BOARD_WIDTH/2 - 50, Commons.BOARD_HEIGHT/2);
     }
 
 
@@ -94,17 +109,19 @@ public class Board extends JPanel {
 
                 if (alien.isVisible()) {
 
-                    g.drawImage(alien.getImage(), alien.getX() - (Commons.ALIEN_WIDTH / 2), alien.getY(), Commons.ALIEN_WIDTH, Commons.ALIEN_HEIGHT, this);
+                    if((lane.getAliens().peek().getWord().equals(alien.getWord()) && alien.isAttacking()) || !alien.isAttacking()) {
+                        g.drawImage(alien.getImage(), alien.getX() - (Commons.ALIEN_WIDTH / 2), alien.getY(), Commons.ALIEN_WIDTH, Commons.ALIEN_HEIGHT, this);
+                        g.drawString(alien.getWord(), alien.getX() - (alien.getWord().length()), alien.getY() + 10 + Commons.ALIEN_HEIGHT);
 
-                    g.drawString(alien.getWord(), alien.getX() - (alien.getWord().length()), alien.getY() + 10 + Commons.ALIEN_HEIGHT);
-
-                    //Highlighting
-                    drawHighlight(g, alien);
+                        //Highlighting
+                        drawHighlight(g, alien);
+                    }
                 }
 
                 if (alien.isDying()) {
 
                     alien.die();
+
                     lane.killAlien();
                 }
             }
@@ -287,7 +304,7 @@ public class Board extends JPanel {
                 }
 
                 int y = shot.getY();
-                y -= 4;
+                y -= 15;
 
                 if (y < 0) {
                     shot.die();
