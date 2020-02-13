@@ -2,12 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="db5f8f3e-360e-4182-afc6-1744faf481e0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Java-Space-Invaders/com/zetcode/Board$GameCycle.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Java-Space-Invaders/com/zetcode/Board$GameCycle.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Java-Space-Invaders/com/zetcode/Board$TAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Java-Space-Invaders/com/zetcode/Board$TAdapter.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Java-Space-Invaders/com/zetcode/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Java-Space-Invaders/com/zetcode/Board.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Java-Space-Invaders/com/zetcode/sprite/Alien.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Java-Space-Invaders/com/zetcode/sprite/Alien.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/zetcode/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/zetcode/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/zetcode/sprite/Alien.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/zetcode/sprite/Alien.java" afterDir="false" />
     </list>
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -61,7 +62,7 @@
         <entry file="file://$PROJECT_DIR$/src/com/zetcode/sprite/Alien.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="242">
-              <caret line="24" column="5" lean-forward="true" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+              <caret line="32" column="5" lean-forward="true" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
               <folding>
                 <element signature="e#453#454#0" expanded="true" />
                 <element signature="e#485#486#0" expanded="true" />
@@ -126,8 +127,8 @@
       <file leaf-file-name="Board.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/zetcode/Board.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1496">
-              <caret line="105" column="114" selection-start-line="105" selection-start-column="114" selection-end-line="105" selection-end-column="114" />
+            <state relative-caret-position="319">
+              <caret line="99" column="139" selection-start-line="99" selection-start-column="139" selection-end-line="99" selection-end-column="139" />
               <folding>
                 <element signature="e#10813#10814#0" expanded="true" />
                 <element signature="e#10881#10882#0" expanded="true" />
@@ -336,7 +337,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26201000" />
+    <option name="totallyTimeSpent" value="26276000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -351,13 +352,13 @@
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="14" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2508324" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.2508324" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Sequence" order="11" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.329718" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Designer" order="3" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1433902" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1433902" />
       <window_info anchor="right" id="Database" order="13" weight="0.32995737" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -391,6 +392,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.329718" />
       <window_info anchor="bottom" id="Sequence" order="12" />
       <window_info id="Favorites" order="6" side_tool="true" />
     </layout>
@@ -398,31 +400,31 @@
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="right" id="Database" order="5" />
-      <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="right" id="Theme Preview" order="6" />
+      <window_info anchor="bottom" id="Message" order="1" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14179105" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="7" />
-      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Sequence" order="0" />
       <window_info active="true" anchor="bottom" id="Run" order="3" visible="true" weight="0.29284164" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
-      <window_info anchor="bottom" id="Find" order="2" />
-      <window_info anchor="right" id="Theme Preview" order="6" />
-      <window_info anchor="right" id="Maven Projects" order="8" />
-      <window_info anchor="bottom" id="Debug" order="4" weight="0.3991323" />
+      <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
+      <window_info anchor="right" id="Database" order="5" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.329718" />
-      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="4" weight="0.3991323" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info id="Capture Tool" order="5" />
-      <window_info anchor="bottom" id="Message" order="1" />
+      <window_info anchor="bottom" id="Find" order="2" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.329718" />
-      <window_info anchor="bottom" id="Sequence" order="0" />
+      <window_info anchor="right" id="Maven Projects" order="8" />
       <window_info id="Favorites" order="6" side_tool="true" />
     </layout-to-restore>
   </component>
@@ -455,6 +457,13 @@
     <state width="1877" height="232" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1581476930153" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/com/zetcode/SpaceInvaders.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/zetcode/sprite/Alien.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -552,10 +561,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2926">
           <caret line="184" column="11" selection-start-line="184" selection-start-column="11" selection-end-line="184" selection-end-column="11" />
-          <folding>
-            <element signature="e#5661#5662#0" expanded="true" />
-            <element signature="e#5701#5702#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -604,10 +609,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="11" column="48" lean-forward="true" selection-start-line="11" selection-start-column="48" selection-end-line="11" selection-end-column="48" />
-          <folding>
-            <element signature="e#121#122#0" expanded="true" />
-            <element signature="e#153#154#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -741,12 +742,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="16" column="18" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
-          <folding>
-            <element signature="e#372#373#0" expanded="true" />
-            <element signature="e#393#394#0" expanded="true" />
-            <element signature="e#407#408#0" expanded="true" />
-            <element signature="e#435#436#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -785,7 +780,7 @@
     <entry file="file://$PROJECT_DIR$/src/com/zetcode/sprite/Alien.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
-          <caret line="24" column="5" lean-forward="true" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+          <caret line="32" column="5" lean-forward="true" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
           <folding>
             <element signature="e#453#454#0" expanded="true" />
             <element signature="e#485#486#0" expanded="true" />
@@ -806,8 +801,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/zetcode/Board.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1496">
-          <caret line="105" column="114" selection-start-line="105" selection-start-column="114" selection-end-line="105" selection-end-column="114" />
+        <state relative-caret-position="319">
+          <caret line="99" column="139" selection-start-line="99" selection-start-column="139" selection-end-line="99" selection-end-column="139" />
           <folding>
             <element signature="e#10813#10814#0" expanded="true" />
             <element signature="e#10881#10882#0" expanded="true" />
