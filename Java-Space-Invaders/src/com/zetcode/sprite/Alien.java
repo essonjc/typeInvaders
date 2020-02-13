@@ -13,6 +13,7 @@ public class Alien extends Sprite {
     private int index;
     private boolean attacking;
 
+
     public Alien(int x, int y, String s) {
         word = s;
         health = s.length();
@@ -20,6 +21,13 @@ public class Alien extends Sprite {
         initAlien(x, y);
     }
 
+    public int getIndex(){
+        return this.index;
+    }
+
+    public int getHealth(){
+        return this.health;
+    }
     public String getWord(){
         return this.word;
     }
