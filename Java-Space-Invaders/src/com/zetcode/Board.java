@@ -39,6 +39,8 @@ public class Board extends JPanel {
 
     private long spawnTime = 2500; //3 seconds
 
+    private int score = 0;
+
     JButton start;
 
     Random generator;
@@ -119,6 +121,7 @@ public class Board extends JPanel {
                 }
 
                 if (alien.isDying()) {
+                    score+=10;
 
                     alien.die();
 
@@ -192,6 +195,12 @@ public class Board extends JPanel {
         g.setColor(defaultColor);
     }
 
+    private void drawScore(Graphics g){
+        Font defaultFont = g.getFont();
+        g.setFont(new Font("default",Font.BOLD,20));
+        g.drawString("Score: "+Integer.toString(score),20, Commons.BOARD_HEIGHT-200);
+    }
+
     @Override
     public void paintComponent(Graphics g) {
             super.paintComponent(g);
@@ -212,6 +221,7 @@ public class Board extends JPanel {
             drawPlayer(g);
             drawShots(g);
             drawBombing(g);
+            drawScore(g);
 
             Toolkit.getDefaultToolkit().sync();
 
