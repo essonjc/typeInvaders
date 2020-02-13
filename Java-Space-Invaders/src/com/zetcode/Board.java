@@ -206,8 +206,6 @@ public class Board extends JPanel {
             g.fillRect(0, 0, d.width, d.height);
             g.setColor(Color.green);
 
-            g.drawLine(0, Commons.GROUND,
-                    Commons.BOARD_WIDTH, Commons.GROUND);
             drawPlanet(g);
 
             drawAliens(g);
