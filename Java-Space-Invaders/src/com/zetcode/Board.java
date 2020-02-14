@@ -111,7 +111,7 @@ public class Board extends JPanel {
 
                 if (alien.isVisible()) {
 
-                    if((lane.getAliens().peek().getWord().equals(alien.getWord()) && alien.isAttacking()) || !alien.isAttacking()) {
+                    if((alien.isAttacking() && lane.getAliens().peek().equals(alien)) || (!alien.isAttacking() && alien.isVisible())) {
                         g.drawImage(alien.getImage(), alien.getX() - (Commons.ALIEN_WIDTH / 2), alien.getY(), Commons.ALIEN_WIDTH, Commons.ALIEN_HEIGHT, this);
                         g.drawString(alien.getWord(), alien.getX() - (alien.getWord().length()), alien.getY() + 10 + Commons.ALIEN_HEIGHT);
 
@@ -264,14 +264,13 @@ public class Board extends JPanel {
         finalTime = new Date();
 
         if (deaths == Commons.NUMBER_OF_ALIENS_TO_DESTROY) {
-
-            inGame = false;
-            timer.stop();
-            message = "Game won!";
+            if(spawnTime >= 1500)
+                spawnTime -= (spawnTime*0.15);
+            deaths = 0;
         }
 
         // player
-       // player.act();
+        // player.act();
 
         ticks = (ticks % 2) + 1;
 
